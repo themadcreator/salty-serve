@@ -33,8 +33,9 @@ serve = (port = 2718, keyfile) ->
         return gzip(new Buffer(stringified))
       .then (compressed) ->
         res.writeHead(200, {
-          'Content-Type'     : 'application/json'
-          'Content-Encoding' : 'gzip'
+          'Content-Type'        : 'application/json'
+          'Content-Disposition' : 'Attachment'
+          'Content-Encoding'    : 'gzip'
         })
         res.write(compressed)
         res.end()
@@ -51,10 +52,15 @@ serve = (port = 2718, keyfile) ->
     filename = path.join(process.cwd(), uri)
     return new Promise((resolve) -> fs.exists(filename, resolve))
       .then (exists) ->
-        if not exists then throw new Error(404)
-      .then ->
-        if fs.statSync(filename).isDirectory() then return listFiles(res, filename)
-        else return serveFile(res, filename)
+        if not exists
+          console.error("404: Requested #{filename}")
+          res.writeHead(404, {'Content-Type' : 'text/plain'})
+          res.end()
+          return
+        if fs.statSync(filename).isDirectory()
+          return listFiles(res, filename)
+        else
+          return serveFile(res, filename)
       .catch (err) ->
         console.error err?.stack ? err
         res.writeHead(500, {'Content-Type' : 'text/plain'})
