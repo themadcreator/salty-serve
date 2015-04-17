@@ -1,0 +1,33 @@
+{
+  "name": "salty-serve",
+  "version": "0.1.0",
+  "description": "Securely serve files over HTTP.",
+  "author": "Bill Dwyer",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "keywords": [
+    "nacl",
+    "server",
+    "cryptography"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themadcreator/salty-serve.git"
+  },
+  "dependencies": {
+    "bluebird": ">=2.9.x",
+    "js-nacl": ">=0.6.x"
+  },
+  "bin": {
+    "salty-keygen": "./bin/salty-keygen",
+    "salty-serve": "./bin/salty-serve",
+    "salty-decrypt": "./bin/salty-decrypt"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2"
+  }
+}
