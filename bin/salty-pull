@@ -1,0 +1,14 @@
+#!/bin/sh
+
+SALTY_HOST=$1
+
+if [ ! $SALTY_HOST ]; then
+  echo ""
+  echo "  Usage: $(basename $0) [salty-server]"
+  echo ""
+  echo "  Where [salty-server] is an HTTP URL like 'http://localhost:1111'"
+  echo ""
+  exit 1
+fi
+
+curl -s ${SALTY_HOST} | xargs -I filename sh -c "echo filename && curl ${SALTY_HOST}/filename | gunzip | salty-decrypt -k client-keys.json > filename"

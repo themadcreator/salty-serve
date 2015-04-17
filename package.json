@@ -19,7 +19,8 @@
   "bin" : {
     "salty-keygen"  : "./bin/salty-keygen",
     "salty-serve"   : "./bin/salty-serve",
-    "salty-decrypt" : "./bin/salty-decrypt"
+    "salty-decrypt" : "./bin/salty-decrypt",
+    "salty-pull"    : "./bin/salty-pull"
   },
   "dependencies" : {
     "bluebird"  : ">=2.9.x",

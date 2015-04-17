@@ -22,13 +22,13 @@ If you do not have permissions to install globally, you can still run everything
 
 #### Generate keys
 
-This will generate both client and server keys. Keep the client keys safe.
+On the client, generate both the client and server keys. Keep the client keys safe.
 
     salty-keygen
 
 #### Start salty-serve
 
-Copy `server-keys.json` to the server. Then, from the directory you want to serve, run:
+Copy `server-keys.json` to the server. Then, to serve the current directory, run:
 
     salty-serve -p 1111 -k server-keys.json .
 
@@ -44,6 +44,9 @@ This command will get the list of all files from the salty-serve, then one-by-on
 
     curl -s http://localhost:1111 | xargs -I filename sh -c "curl -s http://localhost:1111/filename | gunzip | salty-decrypt -k client-keys.json > filename"
 
+Or, for convenience, you can do the same as above with a single command:
+
+    salty-pull http://localhost:1111
 
 # Details
 
