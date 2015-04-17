@@ -1,3 +1,4 @@
+fs = require 'fs'
 
 generate = ->
   nacl = require('js-nacl').instantiate()
@@ -15,7 +16,6 @@ generate = ->
     clientPrivateKey : nacl.to_hex(clientKeypair.boxSk)
   }
 
-  fs = require 'fs'
   fs.writeFileSync('server-keys.json', JSON.stringify(serverKeyFile, null, 2) + '\n')
   fs.writeFileSync('client-keys.json', JSON.stringify(clientKeyFile, null, 2) + '\n')
   return

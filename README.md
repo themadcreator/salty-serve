@@ -9,7 +9,7 @@ access the server, but only the client with the keys can decrypt them.
 
 ### Install salty-serve
 
-On both client and server, run.
+On both client and server, run:
 
     npm install -g salty-serve
 
@@ -28,9 +28,9 @@ This will generate both client and server keys. Keep the client keys safe.
 
 #### Start salty-serve
 
-Copy `server-keys.json` to the server. Then, from the directory you want to server, run:
+Copy `server-keys.json` to the server. Then, from the directory you want to serve, run:
 
-    salty-serve -p 1111 -k server-keys.json
+    salty-serve -p 1111 -k server-keys.json .
 
 #### List all files
 

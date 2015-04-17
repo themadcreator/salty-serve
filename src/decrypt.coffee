@@ -1,7 +1,6 @@
+fs = require('fs')
 
-
-decode = (stream, clientKeyfile = '../client-keys.json') ->
-  fs         = require('fs')
+decode = (stream, clientKeyfile) ->
   Promise    = require('bluebird')
   nacl       = require('js-nacl').instantiate()
   readStream = require('./read-stream')
@@ -23,16 +22,16 @@ run = ->
   commander = require('commander')
   commander
     .version(require('../package.json').version)
-    .description('Decrypts nacl crypto box from stdin to stdout using client keyfile.')
+    .description('Decrypts NaCl crypto_box JSON from stdin to stdout using client keyfile.')
     .usage('-k [client-keys.json]')
     .option('-k, --keys [keyfile]', 'Client keyfile. Generate with salty-keygen.')
     .parse(process.argv)
 
   unless commander.keys? then commander.help()
 
-  unless require('fs').existsSync(commander.keys)
-    console.error "Could not find keys file #{commander.keys}"
-    process.exit(1)
+  unless fs.existsSync(commander.keys)
+    console.error "\nERROR: Could not find keys file '#{commander.keys}'"
+    commander.help()
 
   decode(process.stdin, commander.keys).catch((err) ->
     console.error err?.stack ? err
